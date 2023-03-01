@@ -8,11 +8,9 @@ Realizar uma consulta de endereço via API, fornecendo o CEP via POST, e retorna
 
 ## Use Case
 
-1. O usuário realiza uma requisição à API (POST para /v1/consulta-endereco)
-2. A aplicação recebe a requisição em um Controller
-3. O Controller repassa a informação a um Service
-4. O Service realiza uma requisição GET para a API do viaCEP com a informação do CEP
-5. A API do VIACEP retorna com as informações
-6. Utilizando a informação do 'estado' retornado da API, é realizada uma consulta em um dicionário interno para determinar a região (e consequentemente valor do frete)
-7. Após determinado o valor do frete, o Service prepara a informação e retorna para o Controller
-8. O Controller retorna a informação ao requisitante
+1. O usuário solicita uma consulta à aplicação, fornecendo CEP
+2. A Aplicação valida se o CEP é válido
+3. A Aplicação faz uma consulta de endereço à API ViaCEP fornecendo o CEP
+4. A API retorna com um endereço
+5. Com o endereço, a aplicação calcula o frete
+6. A aplicação retorna para o usuário a informação de endereço, cep e frete
