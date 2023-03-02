@@ -2,10 +2,10 @@ package com.eronalves.consultafrete.models.response;
 
 public class GenericResponse {
 
-	private String message;
+	public String mensagem;
 
-	public GenericResponse(String message) {
-		this.message = message;
+	public GenericResponse(String menssagem) {
+		this.mensagem = menssagem;
 	}
 
 }

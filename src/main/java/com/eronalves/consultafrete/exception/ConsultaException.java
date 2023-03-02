@@ -1,6 +1,6 @@
 package com.eronalves.consultafrete.exception;
 
-public class ConsultaException extends Exception {
+public class ConsultaException extends RuntimeException {
 
 	private static final long serialVersionUID = 3302671975998437796L;
 
