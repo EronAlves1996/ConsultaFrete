@@ -4,19 +4,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.eronalves.consultafrete.exception.ConsultaException;
 import com.eronalves.consultafrete.models.dto.ConsultaDto;
 import com.eronalves.consultafrete.models.response.APIResponse;
 import com.eronalves.consultafrete.service.ConsultaService;
+import com.eronalves.consultafrete.utils.RequestUtil;
 
 @Service
 public class ConsultaServiceImpl implements ConsultaService {
 
-	RestTemplate restTemplate = new RestTemplate();
+	@Autowired
+	private RequestUtil requestUtil;
 
 	private final Map<String, String> tabelaEstadoRegiao = new HashMap<>();
 	private final Map<String, Double> tabelaFrete = new HashMap<>();
@@ -64,9 +66,9 @@ public class ConsultaServiceImpl implements ConsultaService {
 	public ConsultaDto consultaFrete(ConsultaDto dto) throws ConsultaException {
 		if (!validaCep(dto.getCep()))
 			throw new ConsultaException("CEP não é válido");
-		ResponseEntity<APIResponse> enderecoResponse = restTemplate
-				.getForEntity(String.format("http://viacep.com.br/ws/%s/json/", dto.getCep()), APIResponse.class);
-		APIResponse endereco = enderecoResponse.getBody();
+		String url = String.format("http://viacep.com.br/ws/%s/json/", dto.getCep());
+		ResponseEntity<APIResponse> response = requestUtil.requisitarGet(url, APIResponse.class);
+		APIResponse endereco = response.getBody();
 		ConsultaDto returnValue = new ConsultaDto();
 		BeanUtils.copyProperties(endereco, returnValue);
 		returnValue.setRua(endereco.getLogradouro());
