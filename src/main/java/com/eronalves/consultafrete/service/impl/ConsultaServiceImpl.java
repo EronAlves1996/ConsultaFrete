@@ -3,6 +3,7 @@ package com.eronalves.consultafrete.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 	RestTemplate restTemplate;
 
 	private final Map<String, String> tabelaEstadoRegiao = new HashMap<>();
+	private final Map<String, Float> tabelaFrete = new HashMap<>();
 
 	{
 		tabelaEstadoRegiao.put("MG", "Sudeste");
@@ -60,7 +62,9 @@ public class ConsultaServiceImpl implements ConsultaService {
 		ResponseEntity<APIResponse> enderecoResponse = restTemplate
 				.getForEntity(String.format("http://viacep.com.br/ws/%s/json/", dto.getCep()), APIResponse.class);
 		APIResponse endereco = enderecoResponse.getBody();
-
+		ConsultaDto returnValue = new ConsultaDto();
+		BeanUtils.copyProperties(endereco, returnValue);
+		returnValue.setFrete(tabelaEstadoRegiao.get(endereco.getUf()));
 	}
 
 }
