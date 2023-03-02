@@ -14,12 +14,13 @@ import com.eronalves.consultafrete.utils.RequestUtil;
 @SpringBootTest
 public class RequestUtilsTest {
 
+	private static final String IP_NAO_ROTEAVEL = "http://10.255.255.1/";
 	@Autowired
 	RequestUtil requestUtil;
 
 	@Test
 	public void deveJogarErroEmTimeout() throws RestClientException, InterruptedException {
 		assertThrows(ApiTimeoutException.class,
-				() -> requestUtil.requisitarGet("http://10.255.255.1/", EnderecoResponse.class));
+				() -> requestUtil.requisitarGet(IP_NAO_ROTEAVEL, EnderecoResponse.class));
 	}
 }

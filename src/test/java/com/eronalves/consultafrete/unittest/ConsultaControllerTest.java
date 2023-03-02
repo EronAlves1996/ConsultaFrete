@@ -29,8 +29,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @AutoConfigureMockMvc
 public class ConsultaControllerTest {
 
+	private static final String CEP_VALIDO_NAO_EXISTE = "99999999";
+	private static final String CEP_COM_CARACTER_INVALIDO = "01021a20";
 	private static ConsultaDto enderecoRetornado;
 	private static ObjectMapper om = new ObjectMapper();
+	private static final String CEP_VALIDO_SEM_MASCARA = "01001000";
+	private static final String CEP_VALIDO_COM_MASCARA = "01001-000";
 
 	@BeforeAll
 	public static void populaEnderecoRetornado() {
@@ -55,7 +59,7 @@ public class ConsultaControllerTest {
 
 	@Test
 	public void enviaCepSemMascara() throws ConsultaException {
-		CepRequest cepSemMascara = new CepRequest("01001000");
+		CepRequest cepSemMascara = new CepRequest(CEP_VALIDO_SEM_MASCARA);
 		ConsultaDto enderecoDto = cepSemMascara.toEnderecoDto();
 
 		when(consultaService.consultaFrete(enderecoDto)).thenReturn(enderecoRetornado);
@@ -67,7 +71,7 @@ public class ConsultaControllerTest {
 
 	@Test
 	public void enviaCepComMascara() throws ConsultaException {
-		CepRequest cepComMascara = new CepRequest("01001-000");
+		CepRequest cepComMascara = new CepRequest(CEP_VALIDO_COM_MASCARA);
 		ConsultaDto enderecoDto = cepComMascara.toEnderecoDto();
 		when(consultaService.consultaFrete(enderecoDto)).thenReturn(enderecoRetornado);
 
@@ -78,7 +82,7 @@ public class ConsultaControllerTest {
 
 	@Test
 	public void enviaCepInvalido() throws JsonProcessingException, Exception {
-		CepRequest cepInvalido = new CepRequest("01021a20");
+		CepRequest cepInvalido = new CepRequest(CEP_COM_CARACTER_INVALIDO);
 		ConsultaDto enderecoDto = cepInvalido.toEnderecoDto();
 		when(consultaService.consultaFrete(enderecoDto)).thenThrow(ConsultaException.class);
 
@@ -88,7 +92,7 @@ public class ConsultaControllerTest {
 
 	@Test
 	public void apiIndisponivel() throws JsonProcessingException, Exception {
-		CepRequest cepComMascara = new CepRequest("01001-000");
+		CepRequest cepComMascara = new CepRequest(CEP_VALIDO_COM_MASCARA);
 		ConsultaDto enderecoDto = cepComMascara.toEnderecoDto();
 		when(consultaService.consultaFrete(enderecoDto)).thenThrow(ApiTimeoutException.class);
 
@@ -98,7 +102,7 @@ public class ConsultaControllerTest {
 
 	@Test
 	public void cepNaoExiste() throws JsonProcessingException, Exception {
-		CepRequest cepComMascara = new CepRequest("99999999");
+		CepRequest cepComMascara = new CepRequest(CEP_VALIDO_NAO_EXISTE);
 		ConsultaDto enderecoDto = cepComMascara.toEnderecoDto();
 		when(consultaService.consultaFrete(enderecoDto)).thenThrow(CepInexistenteException.class);
 
