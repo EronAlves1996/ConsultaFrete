@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.eronalves.consultafrete.unittest.TabelaFreteTest" tests="27" skipped="0" failures="0" errors="0" timestamp="2023-03-02T19:43:27" hostname="eron-virtualbox" time="0.216">
+  <properties/>
+  <testcase name="[1] estado=MG, frete=7.85" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.022"/>
+  <testcase name="[2] estado=SP, frete=7.85" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.003"/>
+  <testcase name="[3] estado=ES, frete=7.85" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.003"/>
+  <testcase name="[4] estado=RJ, frete=7.85" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.005"/>
+  <testcase name="[5] estado=DF, frete=12.5" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.004"/>
+  <testcase name="[6] estado=GO, frete=12.5" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.013"/>
+  <testcase name="[7] estado=MS, frete=12.5" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.003"/>
+  <testcase name="[8] estado=MT, frete=12.5" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.006"/>
+  <testcase name="[9] estado=MA, frete=15.98" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.005"/>
+  <testcase name="[10] estado=PI, frete=15.98" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.007"/>
+  <testcase name="[11] estado=RN, frete=15.98" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.004"/>
+  <testcase name="[12] estado=CE, frete=15.98" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.005"/>
+  <testcase name="[13] estado=PB, frete=15.98" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.003"/>
+  <testcase name="[14] estado=BA, frete=15.98" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.004"/>
+  <testcase name="[15] estado=PE, frete=15.98" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.004"/>
+  <testcase name="[16] estado=AL, frete=15.98" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.005"/>
+  <testcase name="[17] estado=SE, frete=15.98" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.003"/>
+  <testcase name="[18] estado=SC, frete=17.3" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.005"/>
+  <testcase name="[19] estado=PR, frete=17.3" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.004"/>
+  <testcase name="[20] estado=RS, frete=17.3" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.004"/>
+  <testcase name="[21] estado=AM, frete=20.83" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.005"/>
+  <testcase name="[22] estado=AC, frete=20.83" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.004"/>
+  <testcase name="[23] estado=RO, frete=20.83" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.004"/>
+  <testcase name="[24] estado=RR, frete=20.83" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.005"/>
+  <testcase name="[25] estado=AP, frete=20.83" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.003"/>
+  <testcase name="[26] estado=PA, frete=20.83" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.004"/>
+  <testcase name="[27] estado=TO, frete=20.83" classname="com.eronalves.consultafrete.unittest.TabelaFreteTest" time="0.004"/>
+  <system-out><![CDATA[2023-03-02 16:43:26.866  INFO 29614 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.eronalves.consultafrete.unittest.TabelaFreteTest], using SpringBootContextLoader
+2023-03-02 16:43:26.867  INFO 29614 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.eronalves.consultafrete.unittest.TabelaFreteTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2023-03-02 16:43:26.867  INFO 29614 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.eronalves.consultafrete.unittest.TabelaFreteTest]: TabelaFreteTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-03-02 16:43:26.871  INFO 29614 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.eronalves.consultafrete.ConsultafreteApplication for test class com.eronalves.consultafrete.unittest.TabelaFreteTest
+2023-03-02 16:43:26.872  INFO 29614 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2023-03-02 16:43:26.873  INFO 29614 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@3ae2702a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@7d088813, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@134abd78, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@3b0ed98a, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@12448de1, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2b35c7aa, org.springframework.test.context.event.EventPublishingTestExecutionListener@6dd20ec9, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@20dd5870, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@1640f20f, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@134d7ffa, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@6e948f1c, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@24405466, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@35010a6b]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.9)
+
+2023-03-02 16:43:26.924  INFO 29614 --- [    Test worker] c.e.c.unittest.TabelaFreteTest           : Starting TabelaFreteTest using Java 17.0.4 on eron-virtualbox with PID 29614 (started by eronads in /home/eronads/repos/ConsultaFrete)
+2023-03-02 16:43:26.924  INFO 29614 --- [    Test worker] c.e.c.unittest.TabelaFreteTest           : No active profile set, falling back to 1 default profile: "default"
+2023-03-02 16:43:27.407  INFO 29614 --- [    Test worker] c.e.c.unittest.TabelaFreteTest           : Started TabelaFreteTest in 0.512 seconds (JVM running for 4.928)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
