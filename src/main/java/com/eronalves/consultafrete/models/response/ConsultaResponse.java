@@ -2,8 +2,6 @@ package com.eronalves.consultafrete.models.response;
 
 import java.util.Objects;
 
-import org.springframework.beans.BeanUtils;
-
 import com.eronalves.consultafrete.models.dto.ConsultaDto;
 
 public class ConsultaResponse {
@@ -18,7 +16,13 @@ public class ConsultaResponse {
 
 	public static ConsultaResponse from(ConsultaDto enderecoDto) {
 		ConsultaResponse consultaResponse = new ConsultaResponse();
-		BeanUtils.copyProperties(enderecoDto, consultaResponse);
+		consultaResponse.bairro = enderecoDto.bairro;
+		consultaResponse.cep = enderecoDto.cep;
+		consultaResponse.cidade = enderecoDto.cidade;
+		consultaResponse.complemento = enderecoDto.complemento;
+		consultaResponse.estado = enderecoDto.estado;
+		consultaResponse.frete = enderecoDto.frete;
+		consultaResponse.rua = enderecoDto.rua;
 		return consultaResponse;
 	}
 
