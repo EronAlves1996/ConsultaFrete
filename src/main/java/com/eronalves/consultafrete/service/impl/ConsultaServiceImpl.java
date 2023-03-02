@@ -3,7 +3,6 @@ package com.eronalves.consultafrete.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -67,17 +66,16 @@ public class ConsultaServiceImpl implements ConsultaService {
 	@Override
 	public ConsultaDto consultaFrete(ConsultaDto dto)
 			throws ConsultaException, ApiTimeoutException, CepInexistenteException {
+
 		if (!validaCep(dto.getCep()))
 			throw new ConsultaException("CEP não é válido");
+
 		String url = String.format("http://viacep.com.br/ws/%s/json/", dto.getCep());
 		ResponseEntity<EnderecoResponse> response = requestUtil.requisitarGet(url, EnderecoResponse.class);
 		EnderecoResponse endereco = response.getBody();
+
 		endereco.checarNulos();
-		ConsultaDto returnValue = new ConsultaDto();
-		BeanUtils.copyProperties(endereco, returnValue);
-		returnValue.setRua(endereco.getLogradouro());
-		returnValue.setCidade(endereco.getLocalidade());
-		returnValue.setEstado(endereco.getUf());
+		ConsultaDto dtoARetornar = endereco.toConsultaDto();
 		returnValue.setFrete(tabelaFrete.get(tabelaEstadoRegiao.get(endereco.getUf())));
 		System.out.println(returnValue.getFrete());
 		return returnValue;
