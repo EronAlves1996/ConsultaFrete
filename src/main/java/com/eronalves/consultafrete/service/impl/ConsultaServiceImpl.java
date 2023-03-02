@@ -19,7 +19,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 	RestTemplate restTemplate = new RestTemplate();
 
 	private final Map<String, String> tabelaEstadoRegiao = new HashMap<>();
-	private final Map<String, Float> tabelaFrete = new HashMap<>();
+	private final Map<String, Double> tabelaFrete = new HashMap<>();
 
 	{
 		tabelaEstadoRegiao.put("MG", "Sudeste");
@@ -49,11 +49,11 @@ public class ConsultaServiceImpl implements ConsultaService {
 		tabelaEstadoRegiao.put("AP", "Norte");
 		tabelaEstadoRegiao.put("PA", "Norte");
 		tabelaEstadoRegiao.put("TO", "Norte");
-		tabelaFrete.put("Sudeste", 7.85f);
-		tabelaFrete.put("Centro-Oeste", 12.5f);
-		tabelaFrete.put("Nordeste", 15.98f);
-		tabelaFrete.put("Sul", 17.3f);
-		tabelaFrete.put("Norte", 20.83f);
+		tabelaFrete.put("Sudeste", 7.85);
+		tabelaFrete.put("Centro-Oeste", 12.5);
+		tabelaFrete.put("Nordeste", 15.98);
+		tabelaFrete.put("Sul", 17.3);
+		tabelaFrete.put("Norte", 20.83);
 	}
 
 	private static boolean validaCep(String cep) {
@@ -69,7 +69,11 @@ public class ConsultaServiceImpl implements ConsultaService {
 		APIResponse endereco = enderecoResponse.getBody();
 		ConsultaDto returnValue = new ConsultaDto();
 		BeanUtils.copyProperties(endereco, returnValue);
+		returnValue.setRua(endereco.getLogradouro());
+		returnValue.setCidade(endereco.getLocalidade());
+		returnValue.setEstado(endereco.getUf());
 		returnValue.setFrete(tabelaFrete.get(tabelaEstadoRegiao.get(endereco.getUf())));
+		System.out.println(returnValue.getFrete());
 		return returnValue;
 	}
 

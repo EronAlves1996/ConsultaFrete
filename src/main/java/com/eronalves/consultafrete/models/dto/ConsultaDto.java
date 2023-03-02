@@ -8,7 +8,7 @@ public class ConsultaDto {
 	private String bairro;
 	private String cidade;
 	private String estado;
-	private float frete;
+	private Double frete;
 
 	public String getCep() {
 		return cep;
@@ -58,11 +58,11 @@ public class ConsultaDto {
 		this.estado = estado;
 	}
 
-	public float getFrete() {
+	public Double getFrete() {
 		return frete;
 	}
 
-	public void setFrete(float frete) {
+	public void setFrete(Double frete) {
 		this.frete = frete;
 	}
 

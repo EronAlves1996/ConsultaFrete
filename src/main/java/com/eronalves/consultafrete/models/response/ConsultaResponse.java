@@ -12,7 +12,7 @@ public class ConsultaResponse {
 	private String bairro;
 	private String cidade;
 	private String estado;
-	private String frete;
+	private Double frete;
 
 	public String getCep() {
 		return cep;
@@ -62,11 +62,11 @@ public class ConsultaResponse {
 		this.estado = estado;
 	}
 
-	public String getFrete() {
+	public Double getFrete() {
 		return frete;
 	}
 
-	public void setFrete(String frete) {
+	public void setFrete(Double frete) {
 		this.frete = frete;
 	}
 
