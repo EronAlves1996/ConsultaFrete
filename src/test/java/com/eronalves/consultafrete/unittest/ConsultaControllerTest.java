@@ -35,13 +35,13 @@ public class ConsultaControllerTest {
 	@BeforeAll
 	public static void populaEnderecoRetornado() {
 		enderecoRetornado = new ConsultaDto();
-		enderecoRetornado.setBairro("Sé");
-		enderecoRetornado.setCep("01001-000");
-		enderecoRetornado.setCidade("São Paulo");
-		enderecoRetornado.setComplemento("lado ímpar");
-		enderecoRetornado.setEstado("SP");
-		enderecoRetornado.setFrete(7.85);
-		enderecoRetornado.setRua("Praça da Sé");
+		enderecoRetornado.bairro = "Sé";
+		enderecoRetornado.cep = "01001-000";
+		enderecoRetornado.cidade = "São Paulo";
+		enderecoRetornado.complemento = "lado ímpar";
+		enderecoRetornado.estado = "SP";
+		enderecoRetornado.frete = 7.85;
+		enderecoRetornado.rua = "Praça da Sé";
 	}
 
 	@Autowired
