@@ -69,6 +69,7 @@ public class FormatoCepTest extends SpringConfig {
 
 	@Then("com a mensagem {string}")
 	public void com_a_mensagem(String string) {
+		System.out.println(response);
 		GenericResponse body = (GenericResponse) response.getBody();
 	}
 
