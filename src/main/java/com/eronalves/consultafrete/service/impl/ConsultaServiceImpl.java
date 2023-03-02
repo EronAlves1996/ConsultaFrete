@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.eronalves.consultafrete.exception.ApiTimeoutException;
 import com.eronalves.consultafrete.exception.ConsultaException;
 import com.eronalves.consultafrete.models.dto.ConsultaDto;
 import com.eronalves.consultafrete.models.response.APIResponse;
@@ -63,7 +64,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 	}
 
 	@Override
-	public ConsultaDto consultaFrete(ConsultaDto dto) throws ConsultaException {
+	public ConsultaDto consultaFrete(ConsultaDto dto) throws ConsultaException, ApiTimeoutException {
 		if (!validaCep(dto.getCep()))
 			throw new ConsultaException("CEP não é válido");
 		String url = String.format("http://viacep.com.br/ws/%s/json/", dto.getCep());
