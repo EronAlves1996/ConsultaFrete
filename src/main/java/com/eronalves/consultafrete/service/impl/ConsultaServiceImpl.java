@@ -42,6 +42,8 @@ public class ConsultaServiceImpl implements ConsultaService {
 		tabelaEstadoRegiao.put("AL", "Nordeste");
 		tabelaEstadoRegiao.put("SE", "Nordeste");
 		tabelaEstadoRegiao.put("SC", "Sul");
+		tabelaEstadoRegiao.put("PR", "Sul");
+		tabelaEstadoRegiao.put("RS", "Sul");
 		tabelaEstadoRegiao.put("AM", "Norte");
 		tabelaEstadoRegiao.put("AC", "Norte");
 		tabelaEstadoRegiao.put("RO", "Norte");
@@ -49,6 +51,11 @@ public class ConsultaServiceImpl implements ConsultaService {
 		tabelaEstadoRegiao.put("AP", "Norte");
 		tabelaEstadoRegiao.put("PA", "Norte");
 		tabelaEstadoRegiao.put("TO", "Norte");
+		tabelaFrete.put("Sudeste", 7.85f);
+		tabelaFrete.put("Centro-Oeste", 12.5f);
+		tabelaFrete.put("Nordeste", 15.98f);
+		tabelaFrete.put("Sul", 17.3f);
+		tabelaFrete.put("Norte", 20.83f);
 	}
 
 	private static boolean validaCep(String cep) {
