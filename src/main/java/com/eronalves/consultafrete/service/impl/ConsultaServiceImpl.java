@@ -1,9 +1,5 @@
 package com.eronalves.consultafrete.service.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -14,49 +10,18 @@ import com.eronalves.consultafrete.models.dto.ConsultaDto;
 import com.eronalves.consultafrete.models.response.EnderecoResponse;
 import com.eronalves.consultafrete.service.ConsultaService;
 import com.eronalves.consultafrete.utils.RequestUtil;
+import com.eronalves.consultafrete.utils.TabelaFreteRegiao;
 
 @Service
 public class ConsultaServiceImpl implements ConsultaService {
 
-	@Autowired
 	private RequestUtil requestUtil;
+	private TabelaFreteRegiao tabela;
 
-	private final Map<String, String> tabelaEstadoRegiao = new HashMap<>();
-	private final Map<String, Double> tabelaFrete = new HashMap<>();
-
-	{
-		tabelaEstadoRegiao.put("MG", "Sudeste");
-		tabelaEstadoRegiao.put("SP", "Sudeste");
-		tabelaEstadoRegiao.put("RJ", "Sudeste");
-		tabelaEstadoRegiao.put("ES", "Sudeste");
-		tabelaEstadoRegiao.put("DF", "Centro-Oeste");
-		tabelaEstadoRegiao.put("GO", "Centro-Oeste");
-		tabelaEstadoRegiao.put("MS", "Centro-Oeste");
-		tabelaEstadoRegiao.put("MT", "Centro-Oeste");
-		tabelaEstadoRegiao.put("MA", "Nordeste");
-		tabelaEstadoRegiao.put("PI", "Nordeste");
-		tabelaEstadoRegiao.put("RN", "Nordeste");
-		tabelaEstadoRegiao.put("CE", "Nordeste");
-		tabelaEstadoRegiao.put("PB", "Nordeste");
-		tabelaEstadoRegiao.put("BA", "Nordeste");
-		tabelaEstadoRegiao.put("PB", "Nordeste");
-		tabelaEstadoRegiao.put("AL", "Nordeste");
-		tabelaEstadoRegiao.put("SE", "Nordeste");
-		tabelaEstadoRegiao.put("SC", "Sul");
-		tabelaEstadoRegiao.put("PR", "Sul");
-		tabelaEstadoRegiao.put("RS", "Sul");
-		tabelaEstadoRegiao.put("AM", "Norte");
-		tabelaEstadoRegiao.put("AC", "Norte");
-		tabelaEstadoRegiao.put("RO", "Norte");
-		tabelaEstadoRegiao.put("RR", "Norte");
-		tabelaEstadoRegiao.put("AP", "Norte");
-		tabelaEstadoRegiao.put("PA", "Norte");
-		tabelaEstadoRegiao.put("TO", "Norte");
-		tabelaFrete.put("Sudeste", 7.85);
-		tabelaFrete.put("Centro-Oeste", 12.5);
-		tabelaFrete.put("Nordeste", 15.98);
-		tabelaFrete.put("Sul", 17.3);
-		tabelaFrete.put("Norte", 20.83);
+	public ConsultaServiceImpl(RequestUtil requestUtil) {
+		super();
+		this.requestUtil = requestUtil;
+		tabela = new TabelaFreteRegiao();
 	}
 
 	private static boolean validaCep(String cep) {
@@ -75,10 +40,11 @@ public class ConsultaServiceImpl implements ConsultaService {
 		EnderecoResponse endereco = response.getBody();
 
 		endereco.checarNulos();
+
 		ConsultaDto dtoARetornar = endereco.toConsultaDto();
-		returnValue.setFrete(tabelaFrete.get(tabelaEstadoRegiao.get(endereco.getUf())));
-		System.out.println(returnValue.getFrete());
-		return returnValue;
+		double frete = tabela.calculaFrete(dtoARetornar.getEstado());
+		dtoARetornar.setFrete(frete);
+		return dtoARetornar;
 	}
 
 }
