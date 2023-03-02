@@ -98,4 +98,10 @@ public class ConsultaResponse {
 				&& Objects.equals(rua, other.rua);
 	}
 
+	@Override
+	public String toString() {
+		return "ConsultaResponse [cep=" + cep + ", rua=" + rua + ", complemento=" + complemento + ", bairro=" + bairro
+				+ ", cidade=" + cidade + ", estado=" + estado + ", frete=" + frete + "]";
+	}
+
 }
