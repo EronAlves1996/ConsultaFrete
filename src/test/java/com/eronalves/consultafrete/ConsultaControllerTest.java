@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.eronalves.consultafrete.controllers.ConsultaController;
+import com.eronalves.consultafrete.exception.ApiTimeoutException;
 import com.eronalves.consultafrete.exception.ConsultaException;
 import com.eronalves.consultafrete.models.dto.ConsultaDto;
 import com.eronalves.consultafrete.models.request.CepRequest;
@@ -28,6 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ConsultaControllerTest {
 
 	private static ConsultaDto enderecoRetornado;
+	private static ObjectMapper om = new ObjectMapper();
 
 	@BeforeAll
 	public static void populaEnderecoRetornado() {
@@ -79,10 +81,18 @@ public class ConsultaControllerTest {
 		ConsultaDto enderecoDto = cepInvalido.toEnderecoDto();
 		when(consultaService.consultaFrete(enderecoDto)).thenThrow(ConsultaException.class);
 
-		ObjectMapper om = new ObjectMapper();
-
 		mockMvc.perform(post("/v1/consulta-endereco").contentType(MediaType.APPLICATION_JSON)
 				.content(om.writeValueAsString(cepInvalido))).andExpect(status().is(400));
+	}
+
+	@Test
+	public void apiIndisponivel() throws JsonProcessingException, Exception {
+		CepRequest cepComMascara = new CepRequest("01001-000");
+		ConsultaDto enderecoDto = cepComMascara.toEnderecoDto();
+		when(consultaService.consultaFrete(enderecoDto)).thenThrow(ApiTimeoutException.class);
+
+		mockMvc.perform(post("/v1/consulta-endereco").contentType(MediaType.APPLICATION_JSON)
+				.content(om.writeValueAsString(cepComMascara))).andExpect(status().is(504));
 	}
 
 }
