@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -17,8 +16,7 @@ import com.eronalves.consultafrete.service.ConsultaService;
 @Service
 public class ConsultaServiceImpl implements ConsultaService {
 
-	@Autowired
-	RestTemplate restTemplate;
+	RestTemplate restTemplate = new RestTemplate();
 
 	private final Map<String, String> tabelaEstadoRegiao = new HashMap<>();
 	private final Map<String, Float> tabelaFrete = new HashMap<>();

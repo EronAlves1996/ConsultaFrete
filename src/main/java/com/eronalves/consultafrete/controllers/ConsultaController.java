@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.eronalves.consultafrete.exception.ConsultaException;
 import com.eronalves.consultafrete.models.dto.ConsultaDto;
 import com.eronalves.consultafrete.models.request.CepRequest;
 import com.eronalves.consultafrete.models.response.ConsultaResponse;
@@ -20,7 +21,7 @@ public class ConsultaController {
 	}
 
 	@PostMapping("/consulta-endereco")
-	public ConsultaResponse consultarFrete(@RequestBody CepRequest cep) {
+	public ConsultaResponse consultarFrete(@RequestBody CepRequest cep) throws ConsultaException {
 		ConsultaDto enderecoDto = cep.toEnderecoDto();
 		ConsultaDto consultaFrete = consultaService.consultaFrete(enderecoDto);
 		ConsultaResponse consultaResponse = ConsultaResponse.from(consultaFrete);
