@@ -6,21 +6,13 @@ import com.eronalves.consultafrete.models.dto.ConsultaDto;
 
 public class CepRequest {
 
-	private String cep;
+	public String cep;
 
 	public CepRequest(String cep) {
 		this.cep = cep;
 	}
 
 	public CepRequest() {
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
 	}
 
 	public ConsultaDto toEnderecoDto() {
