@@ -20,6 +20,9 @@ import io.cucumber.java.en.When;
 
 public class FormatoCepTest extends SpringConfig {
 
+	private static final String ENDERECO = "http://localhost:";
+	private static final String URI = "/v1/consulta-endereco";
+
 	@LocalServerPort
 	int port;
 
@@ -31,9 +34,9 @@ public class FormatoCepTest extends SpringConfig {
 
 	@When("o usuario faz uma chamada com CEP {string}")
 	public void o_usuario_faz_uma_chamada_com_cep(String cep) {
+		final String URL = ENDERECO + port + URI;
 		CepRequest cepRequest = new CepRequest(cep);
-		response = restTemplate.postForEntity("http://localhost:" + port + "/v1/consulta-endereco", cepRequest,
-				ConsultaResponse.class);
+		response = restTemplate.postForEntity(URL, cepRequest, ConsultaResponse.class);
 	}
 
 	@Then("o usuario recebe um status {int}")
@@ -46,21 +49,21 @@ public class FormatoCepTest extends SpringConfig {
 		ConsultaResponse resposta = (ConsultaResponse) response.getBody();
 		System.out.println(resposta);
 		assertNotNull(resposta);
-		assertNotNull(resposta.getBairro());
-		assertNotNull(resposta.getCep());
-		assertNotNull(resposta.getCidade());
-		assertNotNull(resposta.getComplemento());
-		assertNotNull(resposta.getEstado());
-		assertNotNull(resposta.getFrete());
-		assertNotNull(resposta.getRua());
+		assertNotNull(resposta.bairro);
+		assertNotNull(resposta.cep);
+		assertNotNull(resposta.cidade);
+		assertNotNull(resposta.complemento);
+		assertNotNull(resposta.estado);
+		assertNotNull(resposta.frete);
+		assertNotNull(resposta.rua);
 	}
 
 	@When("o usuario faz uma chamada com CEP invalido {string}")
 	public void o_usuario_faz_uma_chamada_com_cep_invalido(String cep) {
+		final String URL = ENDERECO + port + URI;
 		CepRequest cepRequest = new CepRequest(cep);
 		try {
-			response = restTemplate.postForEntity("http://localhost:" + port + "/v1/consulta-endereco", cepRequest,
-					GenericResponse.class);
+			response = restTemplate.postForEntity(URL, cepRequest, GenericResponse.class);
 			System.out.println(response);
 		} catch (HttpClientErrorException ex) {
 			response = ResponseEntity.status(ex.getStatusCode())
