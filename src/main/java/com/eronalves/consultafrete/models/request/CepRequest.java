@@ -8,6 +8,13 @@ public class CepRequest {
 
 	private String cep;
 
+	public CepRequest(String cep) {
+		this.cep = cep;
+	}
+
+	public CepRequest() {
+	}
+
 	public String getCep() {
 		return cep;
 	}
