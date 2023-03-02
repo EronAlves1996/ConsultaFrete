@@ -1,5 +1,7 @@
 package com.eronalves.consultafrete.models.response;
 
+import com.eronalves.consultafrete.exception.CepInexistenteException;
+
 public class APIResponse {
 
 	private String cep;
@@ -55,6 +57,13 @@ public class APIResponse {
 
 	public void setUf(String uf) {
 		this.uf = uf;
+	}
+
+	public void checarNulos() {
+		if (cep == null && logradouro == null && complemento == null && bairro == null && localidade == null
+				&& uf == null)
+			throw new CepInexistenteException("Cep não existe");
+
 	}
 
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.eronalves.consultafrete.exception.ApiTimeoutException;
+import com.eronalves.consultafrete.exception.CepInexistenteException;
 import com.eronalves.consultafrete.exception.ConsultaException;
 import com.eronalves.consultafrete.models.response.GenericResponse;
 
@@ -25,6 +26,13 @@ public class ConsultaControllerAdvice {
 	public ResponseEntity<GenericResponse> retornaMensagemDeErro(ApiTimeoutException ex) {
 		GenericResponse mensagemErro = new GenericResponse(ex.getMessage());
 		return ResponseEntity.status(HttpStatus.GATEWAY_TIMEOUT).body(mensagemErro);
+	}
+
+	@ExceptionHandler(CepInexistenteException.class)
+	@ResponseStatus(code = HttpStatus.OK)
+	public ResponseEntity<GenericResponse> retornaMensagemDeErro(ClassCastException ex) {
+		GenericResponse mensagemErro = new GenericResponse(ex.getMessage());
+		return ResponseEntity.ok(mensagemErro);
 	}
 
 }

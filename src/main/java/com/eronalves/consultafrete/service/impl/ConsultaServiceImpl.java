@@ -70,6 +70,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 		String url = String.format("http://viacep.com.br/ws/%s/json/", dto.getCep());
 		ResponseEntity<APIResponse> response = requestUtil.requisitarGet(url, APIResponse.class);
 		APIResponse endereco = response.getBody();
+		endereco.checarNulos();
 		ConsultaDto returnValue = new ConsultaDto();
 		BeanUtils.copyProperties(endereco, returnValue);
 		returnValue.setRua(endereco.getLogradouro());
