@@ -9,6 +9,8 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class ConsultafreteApplication {
 
+	private static final int SEGUNDO = 1000;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ConsultafreteApplication.class, args);
 	}
@@ -16,10 +18,10 @@ public class ConsultafreteApplication {
 	@Bean
 	public RestTemplate restTemplate() {
 		SimpleClientHttpRequestFactory simpleClientHttpRequestFactory = new SimpleClientHttpRequestFactory();
-		simpleClientHttpRequestFactory.setConnectTimeout(2500);
+		simpleClientHttpRequestFactory.setConnectTimeout((int) 2.5 * SEGUNDO);
 
 		// Read Timeout de 1s
-		simpleClientHttpRequestFactory.setReadTimeout(1000);
+		simpleClientHttpRequestFactory.setReadTimeout(1 * SEGUNDO);
 
 		RestTemplate restTemplate = new RestTemplate(simpleClientHttpRequestFactory);
 		return restTemplate;
