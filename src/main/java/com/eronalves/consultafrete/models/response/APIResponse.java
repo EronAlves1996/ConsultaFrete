@@ -59,7 +59,7 @@ public class APIResponse {
 		this.uf = uf;
 	}
 
-	public void checarNulos() {
+	public void checarNulos() throws CepInexistenteException {
 		if (cep == null && logradouro == null && complemento == null && bairro == null && localidade == null
 				&& uf == null)
 			throw new CepInexistenteException("Cep não existe");

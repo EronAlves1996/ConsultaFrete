@@ -30,9 +30,9 @@ public class ConsultaControllerAdvice {
 
 	@ExceptionHandler(CepInexistenteException.class)
 	@ResponseStatus(code = HttpStatus.OK)
-	public ResponseEntity<GenericResponse> retornaMensagemDeErro(ClassCastException ex) {
+	public ResponseEntity<GenericResponse> retornaMensagemDeErro(CepInexistenteException ex) {
 		GenericResponse mensagemErro = new GenericResponse(ex.getMessage());
-		return ResponseEntity.ok(mensagemErro);
+		return ResponseEntity.ok().body(mensagemErro);
 	}
 
 }

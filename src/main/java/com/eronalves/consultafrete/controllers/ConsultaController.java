@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eronalves.consultafrete.exception.ApiTimeoutException;
+import com.eronalves.consultafrete.exception.CepInexistenteException;
 import com.eronalves.consultafrete.exception.ConsultaException;
 import com.eronalves.consultafrete.models.dto.ConsultaDto;
 import com.eronalves.consultafrete.models.request.CepRequest;
@@ -21,7 +22,8 @@ public class ConsultaController {
 	private ConsultaService consultaService;
 
 	@PostMapping("/consulta-endereco")
-	public ConsultaResponse consultarFrete(@RequestBody CepRequest cep) throws ConsultaException, ApiTimeoutException {
+	public ConsultaResponse consultarFrete(@RequestBody CepRequest cep)
+			throws ConsultaException, ApiTimeoutException, CepInexistenteException {
 		ConsultaDto enderecoDto = cep.toEnderecoDto();
 		ConsultaDto consultaFrete = consultaService.consultaFrete(enderecoDto);
 		ConsultaResponse consultaResponse = ConsultaResponse.from(consultaFrete);
