@@ -1,5 +1,9 @@
 package com.eronalves.consultafrete.models.response;
 
+import org.springframework.beans.BeanUtils;
+
+import com.eronalves.consultafrete.models.dto.ConsultaDto;
+
 public class ConsultaResponse {
 
 	private String cep;
@@ -64,6 +68,12 @@ public class ConsultaResponse {
 
 	public void setFrete(String frete) {
 		this.frete = frete;
+	}
+
+	public static ConsultaResponse from(ConsultaDto enderecoDto) {
+		ConsultaResponse consultaResponse = new ConsultaResponse();
+		BeanUtils.copyProperties(enderecoDto, consultaResponse);
+		return consultaResponse;
 	}
 
 }
