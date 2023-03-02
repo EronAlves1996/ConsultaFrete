@@ -60,7 +60,8 @@ public class FormatoCepTest extends SpringConfig {
 		CepRequest cepRequest = new CepRequest(cep);
 		try {
 			response = restTemplate.postForEntity("http://localhost:" + port + "/v1/consulta-endereco", cepRequest,
-					ConsultaResponse.class);
+					GenericResponse.class);
+			System.out.println(response);
 		} catch (HttpClientErrorException ex) {
 			response = ResponseEntity.status(ex.getStatusCode())
 					.body(om.convertValue(ex.getResponseBodyAsString(), GenericResponse.class));
@@ -69,7 +70,6 @@ public class FormatoCepTest extends SpringConfig {
 
 	@Then("com a mensagem {string}")
 	public void com_a_mensagem(String string) {
-		System.out.println(response);
 		GenericResponse body = (GenericResponse) response.getBody();
 	}
 

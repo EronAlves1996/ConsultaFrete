@@ -8,4 +8,7 @@ public class GenericResponse {
 		this.mensagem = menssagem;
 	}
 
+	public GenericResponse() {
+	}
+
 }
