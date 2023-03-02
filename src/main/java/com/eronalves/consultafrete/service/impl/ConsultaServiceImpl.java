@@ -44,6 +44,7 @@ public class ConsultaServiceImpl implements ConsultaService {
 		ConsultaDto dtoARetornar = endereco.toConsultaDto();
 		double frete = tabela.calculaFrete(dtoARetornar.getEstado());
 		dtoARetornar.setFrete(frete);
+
 		return dtoARetornar;
 	}
 

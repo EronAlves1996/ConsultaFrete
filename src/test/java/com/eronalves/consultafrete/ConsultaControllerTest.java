@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.eronalves.consultafrete.controllers.ConsultaController;
 import com.eronalves.consultafrete.exception.ApiTimeoutException;
+import com.eronalves.consultafrete.exception.CepInexistenteException;
 import com.eronalves.consultafrete.exception.ConsultaException;
 import com.eronalves.consultafrete.models.dto.ConsultaDto;
 import com.eronalves.consultafrete.models.request.CepRequest;
@@ -93,6 +94,16 @@ public class ConsultaControllerTest {
 
 		mockMvc.perform(post("/v1/consulta-endereco").contentType(MediaType.APPLICATION_JSON)
 				.content(om.writeValueAsString(cepComMascara))).andExpect(status().is(504));
+	}
+
+	@Test
+	public void cepNaoExiste() throws JsonProcessingException, Exception {
+		CepRequest cepComMascara = new CepRequest("99999999");
+		ConsultaDto enderecoDto = cepComMascara.toEnderecoDto();
+		when(consultaService.consultaFrete(enderecoDto)).thenThrow(CepInexistenteException.class);
+
+		mockMvc.perform(post("/v1/consulta-endereco").contentType(MediaType.APPLICATION_JSON)
+				.content(om.writeValueAsString(cepComMascara))).andExpect(status().is(200));
 	}
 
 }
