@@ -12,7 +12,7 @@ import com.eronalves.consultafrete.exception.ApiTimeoutException;
 import com.eronalves.consultafrete.exception.CepInexistenteException;
 import com.eronalves.consultafrete.exception.ConsultaException;
 import com.eronalves.consultafrete.models.dto.ConsultaDto;
-import com.eronalves.consultafrete.models.response.APIResponse;
+import com.eronalves.consultafrete.models.response.EnderecoResponse;
 import com.eronalves.consultafrete.service.ConsultaService;
 import com.eronalves.consultafrete.utils.RequestUtil;
 
@@ -70,8 +70,8 @@ public class ConsultaServiceImpl implements ConsultaService {
 		if (!validaCep(dto.getCep()))
 			throw new ConsultaException("CEP não é válido");
 		String url = String.format("http://viacep.com.br/ws/%s/json/", dto.getCep());
-		ResponseEntity<APIResponse> response = requestUtil.requisitarGet(url, APIResponse.class);
-		APIResponse endereco = response.getBody();
+		ResponseEntity<EnderecoResponse> response = requestUtil.requisitarGet(url, EnderecoResponse.class);
+		EnderecoResponse endereco = response.getBody();
 		endereco.checarNulos();
 		ConsultaDto returnValue = new ConsultaDto();
 		BeanUtils.copyProperties(endereco, returnValue);
