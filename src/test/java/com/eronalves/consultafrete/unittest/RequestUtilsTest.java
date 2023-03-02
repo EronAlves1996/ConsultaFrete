@@ -1,4 +1,4 @@
-package com.eronalves.consultafrete;
+package com.eronalves.consultafrete.unittest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

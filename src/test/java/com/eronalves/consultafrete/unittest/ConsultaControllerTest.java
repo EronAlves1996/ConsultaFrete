@@ -1,4 +1,4 @@
-package com.eronalves.consultafrete;
+package com.eronalves.consultafrete.unittest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
