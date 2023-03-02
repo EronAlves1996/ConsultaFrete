@@ -2,12 +2,17 @@ package com.eronalves.consultafrete;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
 
 import com.eronalves.consultafrete.controllers.ConsultaController;
 import com.eronalves.consultafrete.exception.ConsultaException;
@@ -15,8 +20,11 @@ import com.eronalves.consultafrete.models.dto.ConsultaDto;
 import com.eronalves.consultafrete.models.request.CepRequest;
 import com.eronalves.consultafrete.models.response.ConsultaResponse;
 import com.eronalves.consultafrete.service.ConsultaService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
+@AutoConfigureMockMvc
 public class ConsultaControllerTest {
 
 	private static ConsultaDto enderecoRetornado;
@@ -39,6 +47,9 @@ public class ConsultaControllerTest {
 	@MockBean
 	ConsultaService consultaService;
 
+	@Autowired
+	MockMvc mockMvc;
+
 	@Test
 	public void enviaCepSemMascara() throws ConsultaException {
 		CepRequest cepSemMascara = new CepRequest("01001000");
@@ -60,6 +71,18 @@ public class ConsultaControllerTest {
 		ConsultaResponse retornoConsulta = consultaController.consultarFrete(cepComMascara);
 
 		assertEquals(retornoConsulta, ConsultaResponse.from(enderecoRetornado));
+	}
+
+	@Test
+	public void enviaCepInvalido() throws JsonProcessingException, Exception {
+		CepRequest cepInvalido = new CepRequest("01021a20");
+		ConsultaDto enderecoDto = cepInvalido.toEnderecoDto();
+		when(consultaService.consultaFrete(enderecoDto)).thenThrow(ConsultaException.class);
+
+		ObjectMapper om = new ObjectMapper();
+
+		mockMvc.perform(post("/v1/consulta-endereco").contentType(MediaType.APPLICATION_JSON)
+				.content(om.writeValueAsString(cepInvalido))).andExpect(status().is(400));
 	}
 
 }
