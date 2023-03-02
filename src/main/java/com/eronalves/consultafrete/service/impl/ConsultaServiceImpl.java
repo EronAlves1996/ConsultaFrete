@@ -32,17 +32,20 @@ public class ConsultaServiceImpl implements ConsultaService {
 	public ConsultaDto consultaFrete(ConsultaDto dto)
 			throws ConsultaException, ApiTimeoutException, CepInexistenteException {
 
-		if (!validaCep(dto.getCep()))
+		String cep = dto.cep;
+
+		if (!validaCep(cep))
 			throw new ConsultaException("CEP não é válido");
 
-		String url = String.format("http://viacep.com.br/ws/%s/json/", dto.getCep());
+		String url = String.format("http://viacep.com.br/ws/%s/json/", cep);
 		ResponseEntity<EnderecoResponse> response = requestUtil.requisitarGet(url, EnderecoResponse.class);
 		EnderecoResponse endereco = response.getBody();
 		endereco.checarNulos();
 
 		ConsultaDto dtoARetornar = endereco.toConsultaDto();
-		double frete = tabela.calculaFrete(dtoARetornar.getEstado());
-		dtoARetornar.setFrete(frete);
+		String estado = dtoARetornar.estado;
+		double frete = tabela.calculaFrete(estado);
+		dtoARetornar.frete = frete;
 
 		return dtoARetornar;
 	}

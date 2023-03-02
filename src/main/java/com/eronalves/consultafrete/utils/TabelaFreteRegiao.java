@@ -19,6 +19,6 @@ public class TabelaFreteRegiao {
 
 	public double calculaFrete(String estado) {
 		Optional<Regiao> regiao = regioes.stream().filter(r -> r.possuiEstado(estado)).findFirst();
-		return regiao.get().getFrete();
+		return regiao.get().frete;
 	}
 }

@@ -5,7 +5,7 @@ import java.util.List;
 public class Regiao {
 
 	private String nome;
-	private double frete;
+	public double frete;
 	private List<String> estados;
 
 	public Regiao(String nome, double frete, List<String> estados) {
@@ -17,10 +17,6 @@ public class Regiao {
 
 	public boolean possuiEstado(String estado) {
 		return estados.stream().anyMatch(e -> e.contains(estado));
-	}
-
-	public double getFrete() {
-		return frete;
 	}
 
 }
