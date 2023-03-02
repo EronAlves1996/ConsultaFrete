@@ -38,7 +38,6 @@ public class ConsultaServiceImpl implements ConsultaService {
 		String url = String.format("http://viacep.com.br/ws/%s/json/", dto.getCep());
 		ResponseEntity<EnderecoResponse> response = requestUtil.requisitarGet(url, EnderecoResponse.class);
 		EnderecoResponse endereco = response.getBody();
-
 		endereco.checarNulos();
 
 		ConsultaDto dtoARetornar = endereco.toConsultaDto();
