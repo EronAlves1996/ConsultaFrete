@@ -71,7 +71,8 @@ public class ConsultaServiceImpl implements ConsultaService {
 		APIResponse endereco = enderecoResponse.getBody();
 		ConsultaDto returnValue = new ConsultaDto();
 		BeanUtils.copyProperties(endereco, returnValue);
-		returnValue.setFrete(tabelaEstadoRegiao.get(endereco.getUf()));
+		returnValue.setFrete(tabelaFrete.get(tabelaEstadoRegiao.get(endereco.getUf())));
+		return returnValue;
 	}
 
 }
