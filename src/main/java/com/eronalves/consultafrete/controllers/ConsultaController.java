@@ -14,6 +14,9 @@ import com.eronalves.consultafrete.models.request.CepRequest;
 import com.eronalves.consultafrete.models.response.ConsultaResponse;
 import com.eronalves.consultafrete.service.ConsultaService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+
 @RestController
 @RequestMapping("/v1")
 public class ConsultaController {
@@ -21,6 +24,8 @@ public class ConsultaController {
 	@Autowired
 	private ConsultaService consultaService;
 
+	@Operation(summary = "Consulta um endereço e valor de frete por meio do CEP", method = "POST")
+	@ApiResponse(responseCode = "200", description = "Consulta um endereço e calcula o valor do frete para o mesmo")
 	@PostMapping("/consulta-endereco")
 	public ConsultaResponse consultarFrete(@RequestBody CepRequest cep)
 			throws ConsultaException, ApiTimeoutException, CepInexistenteException {
