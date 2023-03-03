@@ -2,16 +2,26 @@ package com.eronalves.consultafrete.models.response;
 
 import java.util.Objects;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import com.eronalves.consultafrete.models.dto.ConsultaDto;
 
 public class ConsultaResponse {
 
+	@NotBlank
 	public String cep;
+	@NotBlank
 	public String rua;
+	@NotNull
 	public String complemento;
+	@NotBlank
 	public String bairro;
+	@NotBlank
 	public String cidade;
+	@NotBlank
 	public String estado;
+	@NotBlank
 	public Double frete;
 
 	public static ConsultaResponse from(ConsultaDto enderecoDto) {

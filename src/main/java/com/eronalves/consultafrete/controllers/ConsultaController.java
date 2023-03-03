@@ -16,6 +16,7 @@ import com.eronalves.consultafrete.service.ConsultaService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/v1")
@@ -25,8 +26,12 @@ public class ConsultaController {
 	private ConsultaService consultaService;
 
 	@Operation(summary = "Consulta um endereço e valor de frete por meio do CEP", method = "POST")
-	@ApiResponse(responseCode = "200", description = "Consulta um endereço e calcula o valor do frete para o mesmo")
-	@PostMapping("/consulta-endereco")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Consulta um endereço e calcula o valor do frete para o mesmo"),
+			@ApiResponse(responseCode = "400", description = "CEP invalido ou mal formatado"),
+			@ApiResponse(responseCode = "504", description = "Serviço de consulta CEP indisponível, tente novamente mais tarde"),
+			@ApiResponse(responseCode = "200", description = "O CEP informado não existe") })
+	@PostMapping(value = "/consulta-endereco", produces = "application/json", consumes = "application/json")
 	public ConsultaResponse consultarFrete(@RequestBody CepRequest cep)
 			throws ConsultaException, ApiTimeoutException, CepInexistenteException {
 		ConsultaDto enderecoDto = cep.toEnderecoDto();
