@@ -6,6 +6,13 @@ import javax.validation.constraints.NotNull;
 
 import com.eronalves.consultafrete.models.dto.ConsultaDto;
 
+/**
+ * Classe de modelo que serve para abrigar a informação de uma request da
+ * aplicação
+ * 
+ * @author eronads
+ *
+ */
 public class CepRequest {
 
 	@NotNull
@@ -20,7 +27,12 @@ public class CepRequest {
 	public CepRequest() {
 	}
 
-	public ConsultaDto toEnderecoDto() {
+	/**
+	 * Transforma essa classe em um ConsultaDTO
+	 * 
+	 * @return
+	 */
+	public ConsultaDto toConsultaDto() {
 		ConsultaDto enderecoDto = new ConsultaDto();
 		enderecoDto.cep = cep;
 		return enderecoDto;

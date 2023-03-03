@@ -60,7 +60,7 @@ public class ConsultaControllerTest {
 	@Test
 	public void enviaCepSemMascara() throws ConsultaException {
 		CepRequest cepSemMascara = new CepRequest(CEP_VALIDO_SEM_MASCARA);
-		ConsultaDto enderecoDto = cepSemMascara.toEnderecoDto();
+		ConsultaDto enderecoDto = cepSemMascara.toConsultaDto();
 
 		when(consultaService.consultaFrete(enderecoDto)).thenReturn(enderecoRetornado);
 
@@ -72,7 +72,7 @@ public class ConsultaControllerTest {
 	@Test
 	public void enviaCepComMascara() throws ConsultaException {
 		CepRequest cepComMascara = new CepRequest(CEP_VALIDO_COM_MASCARA);
-		ConsultaDto enderecoDto = cepComMascara.toEnderecoDto();
+		ConsultaDto enderecoDto = cepComMascara.toConsultaDto();
 		when(consultaService.consultaFrete(enderecoDto)).thenReturn(enderecoRetornado);
 
 		ConsultaResponse retornoConsulta = consultaController.consultarFrete(cepComMascara);
@@ -83,7 +83,7 @@ public class ConsultaControllerTest {
 	@Test
 	public void enviaCepInvalido() throws JsonProcessingException, Exception {
 		CepRequest cepInvalido = new CepRequest(CEP_COM_CARACTER_INVALIDO);
-		ConsultaDto enderecoDto = cepInvalido.toEnderecoDto();
+		ConsultaDto enderecoDto = cepInvalido.toConsultaDto();
 		when(consultaService.consultaFrete(enderecoDto)).thenThrow(ConsultaException.class);
 
 		mockMvc.perform(post("/v1/consulta-endereco").contentType(MediaType.APPLICATION_JSON)
@@ -93,7 +93,7 @@ public class ConsultaControllerTest {
 	@Test
 	public void apiIndisponivel() throws JsonProcessingException, Exception {
 		CepRequest cepComMascara = new CepRequest(CEP_VALIDO_COM_MASCARA);
-		ConsultaDto enderecoDto = cepComMascara.toEnderecoDto();
+		ConsultaDto enderecoDto = cepComMascara.toConsultaDto();
 		when(consultaService.consultaFrete(enderecoDto)).thenThrow(ApiTimeoutException.class);
 
 		mockMvc.perform(post("/v1/consulta-endereco").contentType(MediaType.APPLICATION_JSON)
@@ -103,7 +103,7 @@ public class ConsultaControllerTest {
 	@Test
 	public void cepNaoExiste() throws JsonProcessingException, Exception {
 		CepRequest cepComMascara = new CepRequest(CEP_VALIDO_NAO_EXISTE);
-		ConsultaDto enderecoDto = cepComMascara.toEnderecoDto();
+		ConsultaDto enderecoDto = cepComMascara.toConsultaDto();
 		when(consultaService.consultaFrete(enderecoDto)).thenThrow(CepInexistenteException.class);
 
 		mockMvc.perform(post("/v1/consulta-endereco").contentType(MediaType.APPLICATION_JSON)

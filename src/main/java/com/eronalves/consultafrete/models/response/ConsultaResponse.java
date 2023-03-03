@@ -7,6 +7,12 @@ import javax.validation.constraints.NotNull;
 
 import com.eronalves.consultafrete.models.dto.ConsultaDto;
 
+/**
+ * Classe de modelo que abriga as informações de resposta da aplicação de CEP
+ * 
+ * @author eronads
+ *
+ */
 public class ConsultaResponse {
 
 	@NotBlank
@@ -24,6 +30,12 @@ public class ConsultaResponse {
 	@NotBlank
 	public Double frete;
 
+	/**
+	 * Método que produz um novo ConsultaResponse a partir de um ConsultaDto
+	 * 
+	 * @param enderecoDto
+	 * @return
+	 */
 	public static ConsultaResponse from(ConsultaDto enderecoDto) {
 		ConsultaResponse consultaResponse = new ConsultaResponse();
 		consultaResponse.bairro = enderecoDto.bairro;

@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Classe de ajuda que irá abrigar a table de fretes por região
+ * 
+ * @author eronads
+ *
+ */
 public class TabelaFreteRegiao {
 
 	private List<Regiao> regioes;
@@ -17,6 +23,12 @@ public class TabelaFreteRegiao {
 		regioes.add(new Regiao("Norte", 20.83, List.of("AM", "AC", "RO", "RR", "AP", "PA", "TO")));
 	}
 
+	/**
+	 * Calcula o frete baseado em determinado estado
+	 * 
+	 * @param estado
+	 * @return valor de frete
+	 */
 	public double calculaFrete(String estado) {
 		Optional<Regiao> regiao = regioes.stream().filter(r -> r.possuiEstado(estado)).findFirst();
 		return regiao.get().frete;

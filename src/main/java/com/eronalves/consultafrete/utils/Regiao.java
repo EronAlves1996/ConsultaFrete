@@ -2,6 +2,12 @@ package com.eronalves.consultafrete.utils;
 
 import java.util.List;
 
+/**
+ * Classe de modelo que define uma região, seus estados e o valor de seu frete
+ * 
+ * @author eronads
+ *
+ */
 public class Regiao {
 
 	private String nome;
@@ -15,6 +21,12 @@ public class Regiao {
 		this.estados = estados;
 	}
 
+	/**
+	 * Informa se a região possui determinado estado
+	 * 
+	 * @param estado
+	 * @return
+	 */
 	public boolean possuiEstado(String estado) {
 		return estados.stream().anyMatch(e -> e.contains(estado));
 	}

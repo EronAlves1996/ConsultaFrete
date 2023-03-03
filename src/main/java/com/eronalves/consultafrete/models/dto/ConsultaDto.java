@@ -2,6 +2,13 @@ package com.eronalves.consultafrete.models.dto;
 
 import java.util.Objects;
 
+/**
+ * Objeto de DTO que é utilizado para transportar informações da aplicação entre
+ * camadas
+ * 
+ * @author eronads
+ *
+ */
 public class ConsultaDto {
 
 	public String cep;

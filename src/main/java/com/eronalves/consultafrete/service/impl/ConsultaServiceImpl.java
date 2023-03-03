@@ -12,6 +12,12 @@ import com.eronalves.consultafrete.service.ConsultaService;
 import com.eronalves.consultafrete.utils.RequestUtil;
 import com.eronalves.consultafrete.utils.TabelaFreteRegiao;
 
+/**
+ * Implementação do ConsultaService
+ * 
+ * @author eronads
+ *
+ */
 @Service
 public class ConsultaServiceImpl implements ConsultaService {
 
